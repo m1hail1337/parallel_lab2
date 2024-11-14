@@ -1,11 +1,11 @@
 public class MandelbrotFractal {
 
     public static void main(String[] args) {
-        int width = 80;
-        int height = 40;
-        int maxIterations = 50;
-        double zoom = 20;
-        double xShift = -0.5;
+        int width = 1600;
+        int height = 800;
+        int maxIterations = 100_000;
+        double zoom = 100;
+        double xShift = 0;
         double yShift = 0;
 
         for (int yPixel = 0; yPixel < height; yPixel++) {
