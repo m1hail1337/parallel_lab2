@@ -22,8 +22,12 @@ public class MandelbrotFractal {
         frame.setVisible(true);
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        double zoom = 1.0 / 512;
+        int iterations = 10000;
+        
         //sequential(10000, 1.0 / 512, -1.0, -2.0);
-        parallel(10000, 1.0 / 512, -1.0, -2.0);
+        parallel(iterations, zoom, -1.0, -2.0);
     }
     
     public static long sequential(int maxIterations, double zoom, double top, double left) {
@@ -31,7 +35,9 @@ public class MandelbrotFractal {
         for (int yPixel = 0; yPixel < HEIGHT; yPixel++) {
             drawRow(yPixel, maxIterations, zoom, top, left);
         }
-        return System.currentTimeMillis() - startTime;
+        long result = System.currentTimeMillis() - startTime;
+        System.out.println("Прорисовка заняла " + result + "ms");
+        return result;
     }
     
     public static long parallel(int maxIterations, double zoom, double top, double left) {
@@ -45,7 +51,9 @@ public class MandelbrotFractal {
             }
             executor.shutdown();
         }
-        return System.currentTimeMillis() - startTime;
+        long result = System.currentTimeMillis() - startTime;
+        System.out.println("Прорисовка заняла " + result + "ms");
+        return result;
     }
     
     private static void drawRow(int y, int maxIterations, double zoom, double top, double left) {
